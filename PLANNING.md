@@ -74,3 +74,8 @@ This document outlines the roadmap, future goals, and planned features for AEShi
 - Encrypted archives (ZIP or TAR-style output)
 - Encrypted metadata and secure sharing keys (e.g. PGP layer)
 - Gi
+
+### ❌ Dropped: Native Desktop GUI (e.g., Fyne)
+
+Most users are expected to interact via a web browser, so a cross-platform desktop GUI (Electron/Fyne/Wails) is no longer planned. The focus will shift entirely to building a responsive, secure Single Page Application (SPA) frontend.
+
