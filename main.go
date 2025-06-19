@@ -7,10 +7,18 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 )
 
 func main() {
+	// Initialize the database connection
+	err := InitDB("postgres://username:MysteriousNJCF$28@localhost:5432/AEShield%20DB?sslmode=disable")
+	if err != nil {
+		log.Fatal("Failed to connect to database: ", err)
+	}
+	defer postgresDB.Close()
+
 	http.HandleFunc("/encrypt", handleEncrypt)
 	http.HandleFunc("/decrypt", handleDecrypt)
 
@@ -24,6 +32,7 @@ func handleEncrypt(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Get the key and file from the form data
 	keyHex := r.FormValue("key")
 	file, header, err := r.FormFile("file")
 	if err != nil {
@@ -49,6 +58,11 @@ func handleEncrypt(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Encryption failed: "+err.Error(), http.StatusInternalServerError)
 		return
+	}
+
+	// Store the encrypted file and log the request
+	if err := StoreFile(header.Filename, "encrypt", encrypted); err != nil {
+		log.Println("Failed to store file: ", err)
 	}
 
 	// Set download headers
@@ -87,6 +101,11 @@ func handleDecrypt(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Decryption failed: "+err.Error(), http.StatusInternalServerError)
 		return
+	}
+
+	// Store the decrypted file and log the request
+	if err := StoreFile(header.Filename, "decrypt", decrypted); err != nil {
+		log.Println("Failed to store file: ", err)
 	}
 
 	// Set download headers
