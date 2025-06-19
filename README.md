@@ -25,7 +25,7 @@ go run main.go encrypt path/to/file.txt 0123456789abcdef0123456789abcdef01234567
 
 # Decrypt a file
 go run main.go decrypt path/to/file.txt.enc 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
-
+```
 
 ## 🧭 Project Planning
 
