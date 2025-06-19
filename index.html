@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES File Encryptor / Decryptor</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h2>AES File Encryptor / Decryptor</h2>
+    
+    <label for="keyInput">Enter 64-character hex key (32 bytes): </label>
+    <input id="keyInput" type="text" placeholder="64 hex chars (e.g. 0123...)" maxlength="64" />
+
+    <label for="fileInput">Select File:</label>
+    <input id="fileInput" type="file" />
+
+    <button id="encryptBtn">Encrypt</button>
+    <button id="decryptBtn">Decrypt</button>
+
+    <div id="status"></div>
+
+    <script src="encryptor.js"></script>
+    
+</body>
+</html>
